@@ -47,7 +47,7 @@ configuration = PackwerkMermaid.configure do |config|
   config.packwerk_package_name_callback = lambda { |name| name.gsub('packs/', '') }
 end
 
-PackwerkMermaid::PackwerkFlowChart.new(configuration).generate
+PackwerkMermaid::PackwerkFlowchart.new(configuration).generate
 ```
 
 ## Contributing
