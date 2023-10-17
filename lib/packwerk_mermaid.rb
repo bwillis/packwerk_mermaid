@@ -2,6 +2,7 @@
 
 require_relative "packwerk_mermaid/version"
 require_relative "packwerk_mermaid/configuration"
+require_relative "packwerk_mermaid/packwerk_flowchart"
 
 module PackwerkMermaid
   class Error < StandardError; end

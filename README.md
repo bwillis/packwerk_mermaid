@@ -20,10 +20,11 @@ Or install it yourself as:
 
 ## Usage
 
-There is no CLI yet, but it's easy enough to write a Ruby script and run it like so:
+There is no CLI, but it's easy enough to write a Ruby script and run it like so:
 
 ```ruby
-require 'packwerk_mermaid/packwerk_flowchart'
+require "packwerk_mermaid"
+require "packwerk_mermaid/packwerk_flowchart"
 
 configuration = PackwerkMermaid.configure do |config|
   # The title that appears at the top of your diagram
@@ -38,13 +39,21 @@ configuration = PackwerkMermaid.configure do |config|
   # What directory is packwerk's root dir
   config.packwerk_directory = '.'
   
-  # Simple static mapping for renaming packages
+  # Simple static mapping for renaming packages, these happened
+  # before the packwerk_package_name_callback runs
   config.packwerk_package_name_mapping = {
-    '.' => 'root'
+    '.' => 'root',
+    'packs/cli' => 'CLI',
   }
   
   # Flexible way to rename packages
   config.packwerk_package_name_callback = lambda { |name| name.gsub('packs/', '') }
+
+  # Hide packages from the diagram
+  config.packwerk_packages_hidden = [
+    'packs/utilities',
+    'packs/legacy_service',
+  ]
 end
 
 PackwerkMermaid::PackwerkFlowchart.new(configuration).generate
