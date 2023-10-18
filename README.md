@@ -69,4 +69,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Packs::Mermaid project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/packs-mermaid/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the PackwerkMermaid project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/bwillis/packwerk_mermaid/blob/master/CODE_OF_CONDUCT.md).
