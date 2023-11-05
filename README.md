@@ -1,6 +1,29 @@
 # Packwerk Mermaid
 
-This is a simple gem for a project using [packwerk](https://github.com/Shopify/packwerk) to generate a [Mermaid](https://mermaid.js.org/) diagram.
+This is a simple gem for a project using [packwerk](https://github.com/Shopify/packwerk) to generate a [Mermaid](https://mermaid.js.org/) diagram. When you generate the output, you can get a diagram that looks like this:
+
+```mermaid
+---
+title: App Name
+---
+flowchart TD
+    0("Nelson Hamill") --> 1("Msgr. Cynthia Dickens");
+    0 --> 2("Adell Friesen MD");
+    2 --> 3("Cortez Purdy");
+    2 --> 4("Renaldo Collier");
+    2 --> 5("Titus Schamberger");
+    2 --> 6("Efren Kuhlman");
+    2 --> 7("Osvaldo Legros Esq.");
+    2 --> 8("Byron Hammes");
+    6 --> 9("Carlo Nolan DDS");
+    3 --> 9;
+    1 --> 2;
+    10("Mayola Kovacek") --> 2;
+    10 --> 1;
+    10 --> 5;
+    10 --> 6;
+
+```
 
 ## Installation
 
