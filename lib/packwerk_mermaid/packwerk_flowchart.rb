@@ -23,6 +23,7 @@ module PackwerkMermaid
 
         package.dependencies.each do |dependency_name|
           next if @configuration.packwerk_packages_hidden.include? dependency_name
+          next unless @configuration.packwerk_package_visibility_callback.call(dependency_name, package.name)
 
           builder.add_edge(
             rename_package(package.name),

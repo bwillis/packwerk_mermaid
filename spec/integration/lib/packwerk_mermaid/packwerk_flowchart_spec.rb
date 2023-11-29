@@ -11,6 +11,7 @@ RSpec.describe PackwerkMermaid::PackwerkFlowchart do
       :packwerk_loader,
       :packwerk_package_name_callback,
       :packwerk_packages_hidden,
+      :packwerk_package_visibility_callback,
       :mermaid_title,
       :mermaid_text_type,
       :mermaid_shape_style
@@ -20,6 +21,7 @@ RSpec.describe PackwerkMermaid::PackwerkFlowchart do
       Proc.new { |_dir| Struct.new(:packages).new(packs) },
       packwerk_package_name_callback,
       packwerk_packages_hidden,
+      packwerk_package_visibility_callback,
       'Title',
       PackwerkMermaid::MermaidFlowchartBuilder::TEXT,
       PackwerkMermaid::MermaidFlowchartBuilder::RECTANGLE_ROUNDED,
@@ -28,6 +30,7 @@ RSpec.describe PackwerkMermaid::PackwerkFlowchart do
   let(:packs) { [] }
   let(:packwerk_package_name_mapping) { {} }
   let(:packwerk_package_name_callback) { nil }
+  let(:packwerk_package_visibility_callback) { Proc.new { |_,_| true } }
   let(:packwerk_packages_hidden) { [] }
 
   describe '#generate' do
@@ -115,6 +118,33 @@ RSpec.describe PackwerkMermaid::PackwerkFlowchart do
         [
           'packs/pack3',
         ]
+      end
+
+      it 'returns the mermaid flowchart with the nodes' do
+        expect(flowchart).to eq(
+          <<~MERMAID
+            ---
+            title: Title
+            ---
+            flowchart TD
+                0("packs/pack0") --> 1("packs/pack1");
+                1 --> 2("packs/pack2");
+          MERMAID
+        )
+      end
+    end
+
+    context 'when there are multiple packs and some are hidden via callback' do
+      let(:packs) do
+        [
+          ['packs/pack0', double(name: 'packs/pack0', dependencies: ['packs/pack1'])],
+          ['packs/pack1', double(name: 'packs/pack1', dependencies: ['packs/pack2', 'packs/pack3'])],
+          ['packs/pack2', double(name: 'packs/pack2', dependencies: [])],
+          ['packs/pack3', double(name: 'packs/pack3', dependencies: [])],
+        ]
+      end
+      let(:packwerk_package_visibility_callback) do
+        Proc.new { |name, _parent_name| name != 'packs/pack3' }
       end
 
       it 'returns the mermaid flowchart with the nodes' do

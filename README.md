@@ -72,11 +72,14 @@ configuration = PackwerkMermaid.configure do |config|
   # Flexible way to rename packages
   config.packwerk_package_name_callback = lambda { |name| name.gsub('packs/', '') }
 
-  # Hide packages from the diagram
+  # Simple static mapping of packages to hide
   config.packwerk_packages_hidden = [
     'packs/utilities',
     'packs/legacy_service',
   ]
+  
+  # Flexible way to show/hide packages
+  config.packwerk_package_name_callback = lambda { |node_name, parent_node_name| should_show?(node_name) }
 end
 
 PackwerkMermaid::PackwerkFlowchart.new(configuration).generate

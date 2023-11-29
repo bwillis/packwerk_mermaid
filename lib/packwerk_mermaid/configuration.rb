@@ -6,6 +6,7 @@ module PackwerkMermaid
       :packwerk_package_name_mapping,
       :packwerk_loader,
       :packwerk_package_name_callback,
+      :packwerk_package_visibility_callback,
       :packwerk_packages_hidden,
       :mermaid_title,
       :mermaid_text_type,
@@ -16,6 +17,7 @@ module PackwerkMermaid
       @packwerk_package_name_mapping = {}
       @packwerk_loader = Proc.new { |dir| Packwerk::PackageSet.load_all_from(dir) }
       @packwerk_packages_hidden = []
+      @packwerk_package_visibility_callback = Proc.new { |_node_name, _parent_node_name| true }
       @mermaid_title = nil
       @mermaid_text_type = MermaidFlowchartBuilder::TEXT
       @mermaid_shape_style = MermaidFlowchartBuilder::RECTANGLE_ROUNDED
